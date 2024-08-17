@@ -1,5 +1,5 @@
 import { Todo } from './todo/todo'
-//import './App.css'
+import './App.css'
 
 export const App=() =>{
   return (
