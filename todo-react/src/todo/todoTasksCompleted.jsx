@@ -4,12 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export const TodoCompletedTask=({id,data,onHandleDeleteTodo,onHandleRestoreTask})=>{
     return (
-        <li key={id}>
-            <span>{data}</span>   
-            <button className="check-btn" onClick={()=>onHandleRestoreTask(data)}>
+        <li className="list-items completed" key={id}>
+            <span className="list-data">{data}</span>   
+            <button className="complete-button" onClick={()=>onHandleRestoreTask(data)}>
             <MdRestore />
             </button>        
-            <button className="detete-btn" onClick={()=>onHandleDeleteTodo(data)}>
+            <button className="delete-button" onClick={()=>onHandleDeleteTodo(data)}>
             <MdDeleteOutline />
             </button>
        </li>

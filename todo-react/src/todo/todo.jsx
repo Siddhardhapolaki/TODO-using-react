@@ -3,6 +3,10 @@ import { TodoForm } from './todoForm';
 import {TodoListDisplay} from './todoListDisplay';
 import { TodoDateTime } from './todoDateTime';
 import { TodoCompletedTask } from './todoTasksCompleted';
+import { ToastContainer, toast } from "react-toastify";
+import './todo.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 export const Todo= () =>{
@@ -28,17 +32,20 @@ export const Todo= () =>{
       });
   
   
+      
     const handleFormSubmition=(inputValue)=>{
     
     if(!inputValue) 
     {
-        alert("Empty task Not accepted");
+        // alert("Empty task Not accepted");
+        toast.warning("Empty task Not accepted");
         return;
     }
 
     if(tasks.includes(inputValue))
     {
-        alert("already task is in list");
+        // alert("already task is in list");
+        toast.warning("already task is in list");
          return;
     }
     setTasks((previousTaskData)=>[...previousTaskData,inputValue]);
@@ -53,6 +60,8 @@ export const Todo= () =>{
  //task deleting in pending tasks
   const handleToDeleteTask = (value) => {
     const updateTask=tasks.filter((curtask)=> curtask!==value )
+    toast.error("Task Deleted",{autoClose: 1000});
+
     setTasks(updateTask)
 
   }
@@ -61,7 +70,12 @@ export const Todo= () =>{
   const handleToCompleteTask=(value)=>{
     const updateTask=tasks.filter((curtask)=> curtask!==value )
     setTasks(updateTask)
+    toast.success("Task Completed",{autoClose: 1000});
+   
+
+
     setCompletedTasks((previousCompletedTasks)=>[...previousCompletedTasks,value]);
+
 
     
   }
@@ -73,6 +87,8 @@ export const Todo= () =>{
   // task to delete completed tasks in completed tasks
   const handleToDeleteCompleteTask=(value)=>{
     const updateDelComTasks=completedTasks.filter((curtask)=> curtask!==value )
+    toast.error("Task Deleted",{autoClose: 1000});
+
     setCompletedTasks(updateDelComTasks)
   }
 
@@ -80,6 +96,7 @@ export const Todo= () =>{
    const handleToRestoreTask=(value)=>{
     const updateDelComTasks=completedTasks.filter((curtask)=> curtask!==value )
     setCompletedTasks(updateDelComTasks)
+    toast.info("Task added to pending tasks",{autoClose:1000})
     setTasks((previoustasks)=>[...previoustasks,value]);
 
    }
@@ -87,18 +104,26 @@ export const Todo= () =>{
   
     return (
         
-        <section className="todo-conatiner">
-            
-            <header>
-                <h1>TODO LIST</h1>
+        <section className="todo-container">
+            <ToastContainer/>
+            <header className='header-1'>
+                <h1 className='heading'>TODO LIST</h1>
                 <TodoDateTime />
             </header>
             
-             <h3>Enter Tasks</h3>
+             <h3 className='enterTasks'>Enter Tasks</h3>
+             <div>
              <TodoForm onAddTodo={handleFormSubmition}/>
-              <h3>pending tasks</h3>
+             </div>
+             <div className='tasks-container'>
+             <div className='pending-tasks'>
+             {tasks.length > 0? <h3 style={{'display':'flex','columnGap': '25px'}}>pending tasks
+                <p>
+                    {tasks.length}/{tasks.length+completedTasks.length}
+                </p>
+             </h3> :null }
             <section>
-                <ul>
+                <ul className='list-container'>
                     {
                         tasks.map((curTask,index)=>{
                         
@@ -117,15 +142,17 @@ export const Todo= () =>{
                 </ul>
             </section>
             <section>
-                <button onClick={()=>setTasks([])}> 
+            {tasks.length > 0 ? <button onClick={()=>setTasks([])}  className='clear-btn'> 
                      clear All    
-                </button>
+                </button>:null}
             </section>
-            
+            </div>
+
+            <div className='completed-tasks' >
             <section>
             <section>
-                <h3>completed tasks</h3>
-                <ul>
+                {completedTasks.length >0? <h3 style={{'marginBottom':'25px'}}>completed tasks</h3>:null}
+                <ul className='list-container'>
                     {
                         completedTasks.map((curTask,index)=>{
                         
@@ -144,11 +171,13 @@ export const Todo= () =>{
                 </ul>
             </section>
             <section>
-                <button onClick={()=>setCompletedTasks([])}> 
+            {completedTasks.length >0 ? <button onClick={()=>setCompletedTasks([])} className='clear-btn'> 
                      clear All    
-                </button>
+                </button>:null}
             </section>
             </section>
+            </div>
+            </div>
         </section>
         
     )

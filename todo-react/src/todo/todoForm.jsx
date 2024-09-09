@@ -1,4 +1,6 @@
 import { useState } from "react";
+import "./todoform.css"
+
 
 export const TodoForm=({onAddTodo})=>{
 
@@ -19,6 +21,7 @@ export const TodoForm=({onAddTodo})=>{
     return(
     <section className="form">
     <form onSubmit={handleFormSubmition}>
+        <div className="form-data">
         <div>
             <input type="text" className="todo-input" autoComplete="off"
             placeholder='Enter task'
@@ -31,6 +34,7 @@ export const TodoForm=({onAddTodo})=>{
             <button type="submit" className="todo-btn">
                 Add Task
             </button>
+        </div>
         </div>
     </form>
     

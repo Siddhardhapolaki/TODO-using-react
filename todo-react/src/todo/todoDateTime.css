@@ -1,0 +1,81 @@
+.date-time{
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+    background:hsl(208, 100%, 97%);
+    padding:10px;
+    border-radius: 10px;
+    align-items: center;
+    
+}
+
+.time{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.time span{
+    font-size: 20px;
+    width: 45px;
+    padding:10px;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    padding: 10px;
+    /* background: #fff; */
+    background: aliceblue;
+    box-shadow: 0 5px 9px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    position: relative;
+
+
+}
+
+.time span::after{
+  
+   font-size: 10px;
+   position: absolute;
+   bottom: 5px;
+   left:50%;
+   transform:translateX(-45%);
+}
+
+
+.hours::after{
+content: 'HOURS';
+}
+
+.minutes::after{
+    content: 'MIN';
+}
+
+.sec::after{
+    content: 'SEC';
+}
+
+.time span.Am{
+    box-shadow: none;
+    font-size: 8px;
+    background: none;
+    font-weight: bold; 
+    font-size:10px ;
+
+
+    
+}
+
+
+span.colon{
+    box-shadow: none;
+    width:9px;
+    background: none;
+    
+}
+
+.date{
+    font-weight: bold; 
+    font-size:20px ;
+}
+
+
